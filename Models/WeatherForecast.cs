@@ -1,6 +1,6 @@
 using System;
 
-namespace calculator
+namespace calculator.Models
 {
     public class WeatherForecast
     {
