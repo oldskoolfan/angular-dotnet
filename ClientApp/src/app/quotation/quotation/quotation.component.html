@@ -1,0 +1,16 @@
+<p>quotation works!</p>
+<form [formGroup]="quotationForm">
+    <div>
+        <label for="ages">Ages of travelers (comma delimited):</label>
+        <input type="text" formControlName="ages" id="ages">
+    </div>
+    <div>
+        <label for="startDate">Trip start date:</label>
+        <input type="date" formControlName="startDate" id="startDate">
+    </div>
+    <div>
+        <label for="endDate">Trip start date:</label>
+        <input type="date" formControlName="endDate" id="endDate">
+    </div>
+    <button (click)="getQuote()">Get quote</button>
+</form>

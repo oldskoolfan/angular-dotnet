@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using calculator.Models;
 using calculator.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,7 @@ namespace calculator.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Post([FromBody] QuotationRequest quoteRequest)
         {
             return Ok(new QuotationResponse
