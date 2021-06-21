@@ -1,16 +1,22 @@
-<p>quotation works!</p>
+<h1>Obtain a travel insurance quote</h1>
 <form [formGroup]="quotationForm">
     <div>
         <label for="ages">Ages of travelers (comma delimited):</label>
         <input type="text" formControlName="ages" id="ages">
+        <span class="error" *ngIf="ages?.errors?.required">At least one age is required.</span>
     </div>
     <div>
         <label for="startDate">Trip start date:</label>
         <input type="date" formControlName="startDate" id="startDate">
+        <span class="error" *ngIf="startDate?.errors?.required">Start date is required.</span>
     </div>
     <div>
         <label for="endDate">Trip start date:</label>
         <input type="date" formControlName="endDate" id="endDate">
+        <span class="error" *ngIf="endDate?.errors?.required">End date is required.</span>
     </div>
     <button (click)="getQuote()">Get quote</button>
 </form>
+<p class="error" *ngIf="quotationForm.errors?.startDateBeforeEndDate">Start date cannot be before end date</p>
+<p class="error" *ngIf="serverError$ | async as serverError">{{serverError}}</p>
+<p *ngIf="quoteResponse$ | async as quoteResponse">Your quote is {{quoteResponse.total | currency}}</p>

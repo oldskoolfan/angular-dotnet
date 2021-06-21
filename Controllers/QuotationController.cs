@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using calculator.Models;
 using calculator.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -27,12 +24,16 @@ namespace calculator.Controllers
         [Authorize]
         public ActionResult Post([FromBody] QuotationRequest quoteRequest)
         {
-            return Ok(new QuotationResponse
-            {
-                CurrencyId = quoteRequest.CurrencyId,
-                QuotationId = Guid.NewGuid(),
-                total = _quotationService.CalculateTotal(quoteRequest)
-            });
+            try {
+                return Ok(new QuotationResponse
+                {
+                    CurrencyId = quoteRequest.CurrencyId,
+                    QuotationId = Guid.NewGuid(),
+                    total = _quotationService.CalculateTotal(quoteRequest)
+                });
+            } catch (Exception) {
+                return StatusCode(500);
+            }
         }
     }
 }

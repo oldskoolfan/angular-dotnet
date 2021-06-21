@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,13 +7,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  public isExpanded = false;
+  public isAuthenticated: boolean;
 
-  collapse() {
+  constructor(
+    private oktaService: OktaAuthService
+  ) {
+    this.oktaService.$authenticationState.subscribe(
+      isAuthenticated => this.isAuthenticated = isAuthenticated);
+  }
+
+  public collapse() {
     this.isExpanded = false;
   }
 
-  toggle() {
+  public toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  public logout() {
+    this.oktaService.signOut();
   }
 }
