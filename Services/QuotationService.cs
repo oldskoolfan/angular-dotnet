@@ -9,14 +9,17 @@ namespace calculator.Services
         public decimal CalculateTotal(QuotationRequest quoteRequest)
         {
             var total = 0m;
-            var ages = quoteRequest.Age.Split(',');
+            var ages = quoteRequest.Age?.Split(',');
             var tripLengthDays = (quoteRequest.EndDate - quoteRequest.StartDate).Days + 1; // inclusive
 
-            foreach (string age in ages) 
+            if (ages is not null)
             {
-                if (int.TryParse(age, out var result))
+                foreach (string age in ages) 
                 {
-                    total += (FixedRate * GetLoadFromAge(result) * tripLengthDays);
+                    if (int.TryParse(age, out var result))
+                    {
+                        total += (FixedRate * GetLoadFromAge(result) * tripLengthDays);
+                    }
                 }
             }
 
