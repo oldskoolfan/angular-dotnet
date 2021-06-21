@@ -1,8 +1,8 @@
 # Quotation PoC
 
 ## Dependencies
- - dotnet 5
- - nodejs >= 14
+ - dotnet 5: https://dotnet.microsoft.com/download/dotnet/5.0
+ - nodejs >= 14: https://nodejs.org/en/download/
 
 ## To run the app
  1. cd into the `ClientApp` directory
